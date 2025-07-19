@@ -1,0 +1,11 @@
+venv/
+bot_venv/
+site_venv/
+.pylintrc
+__pycache__/
+
+.vscode
+.idea
+.env
+
+db.sqlite3
