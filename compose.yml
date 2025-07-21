@@ -30,6 +30,8 @@ services:
       - RABBITMQ_USERNAME
       - RABBITMQ_PASSWORD
     command: python aiogram_run.py
+    volumes:
+      - ./bot:/bot
     depends_on:
       - rabbitmq
 

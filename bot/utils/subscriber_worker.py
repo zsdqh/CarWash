@@ -6,18 +6,17 @@ class SubscriberWorker:
     subs: list[int | str]
 
     def __init__(self):
-        if not os.path.exists("../subscribers.txt"):
-            with open("../subscribers.txt", "w") as file:
-                pass
-
-        with open("../subscribers.txt", "r") as file:
+        # if not os.path.exists("../subscribers.txt"):
+        #     with open("../subscribers.txt", "w") as file:
+        #         pass
+        with open("subscribers.txt", "r") as file:
             self.subs = file.readlines()
         self.subs = list(map(int, self.subs))
         self.password_hash = hashlib.sha256(os.getenv("PASSWORD").encode()).hexdigest()
 
 
     def _save_file(self):
-        with open("../subscribers.txt", "w") as file:
+        with open("subscribers.txt", "w") as file:
             for sub in self.subs:
                 file.write(str(sub) + "\n")
 
