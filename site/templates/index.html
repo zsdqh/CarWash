@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fresh-Auto | Профессиональная химчистка автомобилей</title>
+  <style>
+    :root {
+      --mint: #a8e6cf;
+      --light-mint: #dcedc1;
+      --peach: #ffd3b6;
+      --pink: #ffaaa5;
+      --dark-green: #5c8d89;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: var(--mint);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--dark-green);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo span {
+      margin-left: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-green);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--pink);
+    }
+
+    /* Мобильное меню */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--dark-green);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, var(--mint) 0%, var(--light-mint) 100%);
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      animation: fadeIn 1s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: var(--dark-green);
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--dark-green);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn:hover {
+      background-color: var(--pink);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .services {
+      padding: 100px 0;
+      background-color: white;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--dark-green);
+      font-size: 36px;
+    }
+
+    .service-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .service-card {
+      background-color: var(--light-mint);
+      border-radius: 15px;
+      padding: 30px;
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .service-icon {
+      font-size: 50px;
+      margin-bottom: 20px;
+      color: var(--dark-green);
+    }
+
+    .service-title {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: var(--dark-green);
+    }
+
+    /* Новый раздел - Результаты работ */
+    .portfolio {
+      padding: 100px 0;
+      background-color: var(--mint);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .portfolio-item {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .portfolio-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .portfolio-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .portfolio-item:hover .portfolio-image img {
+      transform: scale(1.05);
+    }
+
+    .portfolio-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 2;
+    }
+
+    .portfolio-content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .portfolio-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--dark-green);
+    }
+
+    .portfolio-desc {
+      color: #666;
+      font-size: 16px;
+    }
+
+    .contact {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--light-mint) 0%, var(--mint) 100%);
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 50px;
+    }
+
+    .contact-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      width: 48%;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .contact-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: var(--dark-green);
+    }
+
+    .contact-details {
+      list-style: none;
+    }
+
+    .contact-details li {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .contact-details i {
+      margin-right: 10px;
+      color: var(--pink);
+      font-size: 20px;
+    }
+
+    footer {
+      background-color: var(--dark-green);
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    .footer-text {
+      font-size: 14px;
+    }
+
+    /* Анимация пузырьков */
+    .bubbles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      border-radius: 50%;
+      animation: rise linear infinite;
+      will-change: transform;
+      pointer-events: none;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    @keyframes rise {
+      0% {
+        bottom: -100px;
+        transform: translateX(0) scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        transform: translateX(100px) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        bottom: 100vh;
+        transform: translateX(-200px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Анимация hero-пузырьков */
+    .hero-bubbles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-bubble {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: hero-rise linear infinite;
+      will-change: transform;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    }
+
+    @keyframes hero-rise {
+      0% {
+        bottom: -50px;
+        transform: translateX(0) scale(0.6);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.9;
+      }
+      100% {
+        bottom: 100%;
+        transform: translateX(calc(-50px + (100px * var(--random-offset)))) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Адаптация пузырьков для мобильных */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
+
+      .contact-card {
+        width: 100%;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bubble {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+      }
+      
+      .hero-bubble {
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="bubbles" id="bubbles"></div>
+  
+  <header>
+    <div class="container">
+      <nav>
+        <a href="\" class="logo">
+          <i class="fas fa-car"></i>
+          <span>Fresh-Auto</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#portfolio">Результаты работ</a></li>
+          <li><a href="#contact">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bubbles" id="heroBubbles"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1>Профессиональная химчистка автомобилей</h1>
+        <p>Вернем вашему автомобилю свежесть и чистоту с использованием экологичных средств и современного оборудования.</p>
+        <a href="#appointment" class="btn">Оставить заявку</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="section-title">Наши услуги</h2>
+      <div class="service-cards">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-spray-can"></i></div>
+          <h3 class="service-title">Полная химчистка</h3>
+          <p>Комплексная очистка всех поверхностей салона с использованием профессиональных средств.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-chair"></i></div>
+          <h3 class="service-title">Чистка сидений</h3>
+          <p>Глубокая очистка сидений от любых загрязнений с восстановлением цвета ткани или кожи.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-wind"></i></div>
+          <h3 class="service-title">Озонирование</h3>
+          <p>Устранение неприятных запахов и дезинфекция салона.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Новый раздел - Результаты работ -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2 class="section-title">Результаты работ</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <div class="portfolio-image">
+            <span class="portfolio-tag">До</span>
+            <img src="{{ url_for('static', filename='portfolio/before1.jpg') }}" alt="Результат работы 1">
+          </div>
+          <div class="portfolio-image">
+            <span class="portfolio-tag">После</span>
+            <img src="{{ url_for('static', filename='portfolio/after1.jpg') }}" alt="Результат работы 1">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="portfolio-title">Химчистка салона</h3>
+            <p class="portfolio-desc">Volkswagen Passat B8, 2018 г.в.</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <div class="portfolio-image">
+            <span class="portfolio-tag">До</span>
+            <img src="{{ url_for('static', filename='portfolio/before2.jpg') }}" alt="Результат работы 2">
+          </div>
+          <div class="portfolio-image">
+            <span class="portfolio-tag">После</span>
+            <img src="{{ url_for('static', filename='portfolio/after2.jpg') }}" alt="Результат работы 2">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="portfolio-title">Чистка кожаных сидений</h3>
+            <p class="portfolio-desc">BMW X5, 2020 г.в.</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <div class="portfolio-image">
+            <span class="portfolio-tag">До</span>
+            <img src="{{ url_for('static', filename='portfolio/before3.jpg') }}" alt="Результат работы 3">
+          </div>
+          <div class="portfolio-image">
+            <span class="portfolio-tag">После</span>
+            <img src="{{ url_for('static', filename='portfolio/after3.jpg') }}" alt="Результат работы 3">
+          </div>
+          <div class="portfolio-content">
+            <h3 class="portfolio-title">Комплексная чистка</h3>
+            <p class="portfolio-desc">Mercedes-Benz E-Class, 2019 г.в.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Контакты</h2>
+      <div class="contact-info">
+        <div class="contact-card">
+          <h3 class="contact-title">Наши контакты</h3>
+          <ul class="contact-details">
+            <li><i class="fas fa-phone"></i><span>+375XXXXXXXXX</span></li>
+            <li><i class="fas fa-phone"></i><span>+375XXXXXXXXX</span></li>
+            <li><i class="fas fa-envelope"></i><span>Pochta@gmail.com</span></li>
+          </ul>
+        </div>
+        <div class="contact-card">
+          <h3 class="contact-title">Адрес</h3>
+          <ul class="contact-details">
+            <li><i class="fas fa-map-marker-alt"></i><span>г. Минск, ул. Пушкина, д. Колотушкина</span></li>
+            <li><i class="fas fa-clock"></i><span>Пн-Пт: 9:00 - 22:00</span></li>
+            <li><i class="fas fa-clock"></i><span>Сб-Вс: спим - отдыхаем</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="appointment" id="appointment">
+    <div class="container" style="margin-top:30px;">
+      <div class="appointment-form" style="background-color: white; padding: 50px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); max-width: 600px; margin: 0 auto 100px;">
+        <h2 style="text-align: center; margin-bottom: 30px; color: var(--dark-green);">Оставить заявку</h2>
+
+       <form id="bookingForm" action="\" method="post">
+  <div style="margin-bottom: 20px;">
+    <label for="name" style="display: block; margin-bottom: 8px; color: #555;">Ваше имя</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;"
+      required
+    >
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <label for="phone" style="display: block; margin-bottom: 8px; color: #555;">Телефон</label>
+    <input
+      type="tel"
+      id="phone"
+      name="phone"
+      style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;"
+      required
+    >
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <label for="date" style="display: block; margin-bottom: 8px; color: #555;">Дата</label>
+    <input
+      type="date"
+      id="date"
+      name="date"
+      style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;"
+      required
+    >
+  </div>
+
+  <input type="submit" class="btn" style="width: 100%;" value="Отправить">
+</form>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p class="footer-text">© 2025 Fresh-Auto.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Мобильное меню
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenuBtn.addEventListener('click', function() {
+      navLinks.classList.toggle('active');
+    });
+
+    // Закрытие меню при клике на ссылку
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function() {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Функция для создания пузырьков с адаптацией для мобильных
+    function createBubble(isHero = false) {
+      const container = isHero ? document.getElementById('heroBubbles') : document.getElementById('bubbles');
+      const bubble = document.createElement('div');
+      bubble.classList.add(isHero ? 'hero-bubble' : 'bubble');
+
+      // Определяем мобильное устройство
+      const isMobile = window.innerWidth <= 768;
+      
+      // Разные параметры для hero-пузырьков и обычных
+      const size = isHero 
+        ? (isMobile ? Math.random() * 15 + 10 : Math.random() * 30 + 10)
+        : (isMobile ? Math.random() * 40 + 20 : Math.random() * 90 + 30);
+
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      
+      if(isHero) {
+        bubble.style.setProperty('--random-offset', Math.random());
+      }
+      
+      // Разная длительность анимации
+      const duration = isHero 
+        ? (isMobile ? Math.random() * 3 + 3 : Math.random() * 4 + 4)
+        : (isMobile ? Math.random() * 4 + 4 : Math.random() * 6 + 6);
+      
+      bubble.style.animationDuration = `${duration}s`;
+
+      container.appendChild(bubble);
+
+      // Удаление пузырька после завершения анимации
+      setTimeout(() => {
+        bubble.remove();
+      }, duration * 1000);
+    }
+
+    // Инициализация с проверкой на мобильные
+    function initBubbles() {
+      const isMobile = window.innerWidth <= 768;
+      
+      // Очищаем существующие пузырьки
+      document.getElementById('bubbles').innerHTML = '';
+      document.getElementById('heroBubbles').innerHTML = '';
+      
+      // Основные пузырьки (по всему сайту)
+      setInterval(() => createBubble(false), isMobile ? 400 : 300);
+      
+      // Hero-пузырьки (только в верхней секции)
+      setInterval(() => createBubble(true), isMobile ? 250 : 150);
+    }
+
+    // Плавная прокрутка для якорных ссылок
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Обработка формы
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      const dateInput = document.getElementById('date');
+      const selected = new Date(dateInput.value);
+      const now = new Date();
+      now.setHours(0,0,0,0);
+      if (selected < now) {
+        e.preventDefault(); // отменяем отправку
+        alert('Пожалуйста, выберите сегодняшнюю дату или дату в будущем');
+        dateInput.focus();
+      }
+      else
+      {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const date = document.getElementById('date').value;
+        alert(`Спасибо, ${name}! Ваша заявка на ${date} будет принята после нажатия "ОК". Мы свяжемся с вами по номеру ${phone} для подтверждения.`);
+      }
+      });
+
+    // Инициализация при загрузке страницы
+    window.addEventListener('load', function() {
+      initBubbles();
+      
+      // Анимация карточек
+      const elements = document.querySelectorAll('.service-card, .contact-card, .portfolio-item');
+      elements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.2}s`;
+      });
+    });
+
+    // Реакция на изменение размера окна
+    window.addEventListener('resize', function() {
+      initBubbles();
+    });
+  </script>
+</body>
+</html>
