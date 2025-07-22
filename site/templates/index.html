@@ -615,6 +615,15 @@
       required
     >
   </div>
+    <div style="margin-bottom: 20px;">
+    <label for="to_connect" style="display: block; margin-bottom: 8px; color: #555;">Предпочитаемый способ связи</label>
+    <input
+      type="text"
+      id="to_connect"
+      name="to_connect"
+      style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;"
+    >
+  </div>
 
   <input type="submit" class="btn" style="width: 100%;" value="Отправить">
 </form>
@@ -721,7 +730,7 @@
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const date = document.getElementById('date').value;
-        alert(`Спасибо, ${name}! Ваша заявка на ${date} будет принята после нажатия "ОК". Мы свяжемся с вами по номеру ${phone} для подтверждения.`);
+        alert(`Спасибо, ${name}! Ваша заявка на ${date} будет принята после нажатия "ОК". Мы свяжемся с вами для подтверждения заявки.`);
       }
       });
 

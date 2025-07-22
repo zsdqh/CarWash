@@ -15,7 +15,8 @@ async def process_message(message: aio_pika.IncomingMessage, bot):
             f"Новая заявка:\n"
             f"Имя: {data['name']}\n"
             f"Телефон: {data['phone']}\n"
-            f"Дата: {data['date']}"
+            f"Дата: {data['date']}\n"
+            "" if not data.get('to_connect') else f"Предпочитаемый способ связи: {data['to_connect']}"
         )
         # Отправляем админу
         sw = SubscriberWorker()

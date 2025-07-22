@@ -13,8 +13,9 @@ def index():
         name  = request.form.get('name', '').strip()
         phone = request.form.get('phone', '').strip()
         date  = request.form.get('date', '').strip()
+        to_connect  = request.form.get('to_connect', '').strip()
 
-        payload = {'name': name, 'phone': phone, 'date': date}
+        payload = {'name': name, 'phone': phone, 'date': date, 'to_connect': to_connect}
         send_to_queue('booking_queue', payload)
 
         return redirect(url_for('index'))
