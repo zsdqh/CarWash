@@ -3,20 +3,22 @@ services:
     build: ./site
     container_name: flask-app
     environment:
-      - FLASK_ENV=development #устранить при проде
-      - PYTHONUNBUFFERED=True  
+      - PYTHONUNBUFFERED=True
       - RABBITMQ_HOST
       - RABBITMQ_PORT
       - RABBITMQ_USERNAME
       - RABBITMQ_PASSWORD
+      - FLASK_ENV=production
     restart: always
     volumes:
       - ./site:/site
     ports:
       - "5000:5000"
-    command: python app.py
+    command: gunicorn -w 1 -b 0.0.0.0:5000 app:app
     depends_on:
       - rabbitmq
+    logging:
+      driver: "none"
 
   telegram-bot:
     build: ./bot
@@ -34,9 +36,11 @@ services:
       - ./bot:/bot
     depends_on:
       - rabbitmq
+    logging:
+      driver: "none"
 
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:3
     container_name: rabbitmq
     restart: always
     volumes:
@@ -47,3 +51,5 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    logging:
+      driver: "none"

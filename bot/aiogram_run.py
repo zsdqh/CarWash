@@ -1,4 +1,5 @@
 import asyncio
+import functools
 
 from aiogram.types import BotCommand
 from handlers.help import help_router
@@ -6,11 +7,11 @@ from utils.rabbit_worker import rabbitmq_listener
 from create_bot import bot, dp, scheduler
 from handlers.start import start_router
 from handlers.subscribe import subscribe_router
-# from work_time.time_func import send_time_msg
+from utils.night_time_delay import process_delayed
 
 async def main():
-    # scheduler.add_job(send_time_msg, 'interval', seconds=10)
-    # scheduler.start()
+    scheduler.add_job(functools.partial(process_delayed, bot), 'cron', hour=9, minute=0)
+    scheduler.start()
     commands = [
         BotCommand(command="start", description="Запуск бота"),
         BotCommand(command="help", description="Информация о командах"),
